@@ -4,6 +4,7 @@ class HomePageTheme {
   static EdgeInsetsGeometry textFieldPadding =
       const EdgeInsets.symmetric(horizontal: 40, vertical: 30);
   static Color addProductButtonColor = Colors.blue;
+  static Color addProductDisabledButtonColor = Colors.grey;
   static ShapeBorder addProductButtonShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10),
   );

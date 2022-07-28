@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class ProductInput extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
-  const ProductInput({Key? key, required this.hint, required this.controller})
+  final void Function(String)? onTextChanged;
+  const ProductInput(
+      {Key? key,
+      required this.hint,
+      required this.controller,
+      this.onTextChanged})
       : super(key: key);
 
   @override
@@ -17,6 +22,7 @@ class ProductInput extends StatelessWidget {
             hintText: hint,
             border: const OutlineInputBorder(),
           ),
+          onChanged: onTextChanged,
         ),
       ],
     );

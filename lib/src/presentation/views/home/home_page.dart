@@ -35,16 +35,28 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
             child: ProductInput(
               controller: bloc!.textController,
               hint: appLocalizations.enter_product_name,
+              onTextChanged: (value) {
+                bloc!.validateText(value);
+              },
             ),
           ),
-          MaterialButton(
-            onPressed: () {
-              bloc!.saveProduct();
-            },
-            color: HomePageTheme.addProductButtonColor,
-            shape: HomePageTheme.addProductButtonShape,
-            child: Text(appLocalizations.add_product),
-          ),
+          StreamBuilder<bool>(
+              stream: bloc!.canSubmit,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return MaterialButton(
+                    onPressed: () {
+                      snapshot.data! ? bloc!.saveProduct() : null;
+                    },
+                    color: snapshot.data!
+                        ? HomePageTheme.addProductButtonColor
+                        : HomePageTheme.addProductDisabledButtonColor,
+                    shape: HomePageTheme.addProductButtonShape,
+                    child: Text(appLocalizations.add_product),
+                  );
+                }
+                return const SizedBox.shrink();
+              }),
           HomePageTheme.separator,
           HomePageTheme.divider,
           Expanded(

@@ -31,12 +31,14 @@ class HomeBloc extends Bloc {
   }
 
   Future saveProduct() async {
+    if (textController.text.isEmpty) return;
     Product product = Product(
       name: textController.text,
     );
     await _productsUseCase.saveProduct(product);
     getProducts();
     textController.clear();
+    _canSubmit.value = false;
   }
 
   Future deleteProduct(String id) async {
@@ -47,6 +49,10 @@ class HomeBloc extends Bloc {
   Future checkProduct(String id) async {
     await _productsUseCase.changeProductCheckState(id);
     getProducts();
+  }
+
+  void validateText(String text) {
+    _canSubmit.value = text.isNotEmpty;
   }
 
   @override

@@ -1,0 +1,7 @@
+{
+  "add_product": "Add Product",
+  "app_bar_title": "Products List",
+  "enter_product_name": "Enter Product Name",
+  "error": "Error loading products :( ",
+  "no_products": "No products added yet"
+}
